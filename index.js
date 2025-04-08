@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const port = process.env.PORT || 5000; // Use dynamic port for deployment
+const port = process.env.PORT || 8080; // Changed to 8080
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -13,6 +13,11 @@ let books = [
     { id: 2, title: 'To Kill a Mockingbird', author: 'Harper Lee', price: 40 },
     { id: 3, title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', price: 35 },
 ];
+
+// Health check
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
 
 // Get all books
 app.get('/books', (req, res) => {
